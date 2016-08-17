@@ -13,7 +13,7 @@ class TaskManager
       database['tasks'] ||= []
       database['total'] ||= 0
       database['total'] += 1
-      database['tasks'] << { "id" => database['total'], "title" => task[:title], "description" => task[:description]}
+      database['tasks'] << { "id" => database['total'], "title" => robot[:title], "description" => robot[:description] }
     end
   end
   
@@ -33,6 +33,20 @@ class TaskManager
   
   def find(id)
     Task.new(raw_task(id))
+  end
+  
+  def update(id, task_data)
+    database.transaction do 
+      task = database["tasks"].find { |data| data["id"] == id }
+      task["title"]       = task_data[:title]
+      task["description"] = task_data[:description]
+    end
+  end
+  
+  def destroy(id)
+    database.transaction do 
+      database["tasks"].delete_if { |task| task["id"] == id }
+    end
   end
 
 end

@@ -2,14 +2,11 @@
 tasks:
 - id: 1
   title: Drive Car
-  description: get into car, start, drive away
+  description: get into car, start, drive away, go fast
 - id: 2
   title: Go to Grocery store
-  description: Get cereal, cheetos, corn
-- id: 3
-  title: Play basketball
-  description: shoot hoops with bros, stack cash
+  description: Get cereal, cheetos, milk
 - id: 4
   title: Eat food
-  description: cheerios, cheesesteak
+  description: cheerios, cheesesteak, mac n cheese
 total: 4
