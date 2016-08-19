@@ -43,7 +43,17 @@ class TaskManagerApp < Sinatra::Base
   end
   
   def task_manager
-    database = YAML::Store.new('db/task_manager')
-    @task_manager ||= TaskManager.new(database)
+    if ENV['RACK_ENV'] == "test"
+      database = SQLite3::Database.new('db/task_manager_test.db')
+    else
+      database = SQLite3::Database.new('db/task_manager_development.db')
+    end
+    database.results_as_hash = true
+    TaskManager.new(database)
   end
+  
+  not_found do
+    erb :error
+  end
+  
 end 
